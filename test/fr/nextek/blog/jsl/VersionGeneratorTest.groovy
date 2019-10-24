@@ -1,4 +1,4 @@
-package fr.nextk.blog.jsl
+package fr.nextek.blog.jsl
 
 import org.jenkinsci.plugins.workflow.cps.CpsScript;
 
@@ -7,10 +7,10 @@ class VersionGeneratorTest extends GroovyTestCase {
     def mockCpsScript() {
         return [
                 'sh'    : { arg ->
-                    if (arg.toString().equals("v1.3.*"))
+		    def mask=((Map)arg[0]).get('script').split('\\s+')[3].toString()
+                    if (mask.equals("\"v1.3.*\""))
                         return "v1.3.0\nv1.3.1\nv1.3.2"
-		    if (arg.toString().equals("v1.4.*"))
-			return ""
+		    return ""
                 },
                 'echo'  : { arg ->
                     println(arg[0])

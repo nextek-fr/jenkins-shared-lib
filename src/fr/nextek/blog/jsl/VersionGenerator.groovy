@@ -9,9 +9,7 @@ class VersionGenerator implements Serializable {
     }
 
     def nextVersion(version) {
-        def tags = retrieveGitTagsForVersion(version)
-        def tagsArray = gitTags.split('\n')
-        return  newVersion(tagsArray, version)
+        return newVersion(retrieveGitTagsForVersion(version).split('\n'), version)
     }
 
     def retrieveGitTagsForVersion(version) {
